@@ -1,0 +1,5 @@
+---
+- name: 'restart-ansible-role-sabnzbd'
+  service:
+    name: 'sabnzbdplus'
+    state: 'restarted'

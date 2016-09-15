@@ -1,0 +1,47 @@
+---
+- name: 'Create the user that the sabnzb daemon will run as'
+  user:
+    name: "{{ sabnzbd_daemon_user }}"
+
+- name: 'Create the sabnzbd application directory'
+  file:
+    path: "{{ sabnzbd_app_directory }}"
+    state: 'directory'
+    owner: "{{ sabnzbd_daemon_user }}"
+    mode: '0755'
+
+- name: 'Put the default sabnzbd.ini config file in place'
+  copy:
+    src: 'sabnzbd.ini'
+    dest: "{{ sabnzbd_app_directory }}/sabnzbd.ini"
+    owner: "{{ sabnzbd_daemon_user }}"
+    mode: '0755'
+    force: 'no'
+
+- name: 'Set the contents of the /etc/default/sabnzbdplus file appropriately'
+  template:
+    src: 'sabnzbdplus.j2'
+    dest: '/etc/default/sabnzbdplus'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: 'restart-ansible-role-sabnzbd'
+
+- name: 'Add the stable sabnzbd PPA repository'
+  apt_repository:
+    repo: 'ppa:jcfp/nobetas'
+    state: 'present'
+    update_cache: 'yes'
+
+- name: 'Install the latest stable version of sabnzbd'
+  apt:
+    name: 'sabnzbdplus'
+    state: 'latest'
+  notify: 'restart-ansible-role-sabnzbd'
+
+- name: 'Ensure that the sabnzbd daemon is running'
+  service:
+    name: 'sabnzbdplus'
+    state: 'started'
+
+- meta: flush_handlers

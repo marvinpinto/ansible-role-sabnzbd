@@ -10,10 +10,21 @@
     owner: "{{ sabnzbd_daemon_user }}"
     mode: '0755'
 
+- name: 'Create the sabnzbd data directories'
+  file:
+    path: "{{ sabnzbd_app_directory }}/{{ item }}"
+    state: 'directory'
+    owner: "{{ sabnzbd_daemon_user }}"
+    mode: '0755'
+  with_items:
+    - 'config'
+    - 'downloads'
+    - 'incomplete-downloads'
+
 - name: 'Put the default sabnzbd.ini config file in place'
   copy:
     src: 'sabnzbd.ini'
-    dest: "{{ sabnzbd_app_directory }}/sabnzbd.ini"
+    dest: "{{ sabnzbd_daemon_config_file }}"
     owner: "{{ sabnzbd_daemon_user }}"
     mode: '0755'
     force: 'no'

@@ -8,4 +8,4 @@ sabnzbd_daemon_user: 'sabdownloader'
 sabnzbd_daemon_host: '127.0.0.1'
 sabnzbd_daemon_port: '8080'
 sabnzbd_daemon_extra_args: ''
-sabnzbd_daemon_config_file: "{{ sabnzbd_app_directory }}/sabnzbd.ini"
+sabnzbd_daemon_config_file: "{{ sabnzbd_app_directory }}/config/sabnzbd.ini"

@@ -1,5 +1,4 @@
 ---
-
 - name: 'Install a few pre-requisite packages'
   apt:
     name: "{{ item }}"
@@ -75,12 +74,6 @@
     owner: "{{ sabnzbd_daemon_user }}"
     mode: '0755'
 
-- name: 'Put the autoProcessMedia.cfg file in place'
-  copy:
-    content: "{{ sabnzbd_nzbtomedia_autoprocessmedia_cfg }}"
-    dest: "{{ sabnzbd_nzbtomedia_directory }}/autoProcessMedia.cfg"
-    mode: '0644'
-
 - name: 'Git clone the nzbtomedia scripts locally'
   git:
     clone: 'yes'
@@ -88,3 +81,9 @@
     force: 'yes'
     repo: 'https://github.com/clinton-hall/nzbToMedia.git'
     version: '2d770510a284fadc6b44628626f5769789086dbb'  # SHA corresponding to v10.15
+
+- name: 'Put the autoProcessMedia.cfg file in place'
+  copy:
+    content: "{{ sabnzbd_nzbtomedia_autoprocessmedia_cfg }}"
+    dest: "{{ sabnzbd_nzbtomedia_directory }}/autoProcessMedia.cfg"
+    mode: '0644'

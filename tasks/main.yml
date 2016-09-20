@@ -31,14 +31,6 @@
     - 'downloads'
     - 'incomplete-downloads'
 
-- name: 'Put the default sabnzbd.ini config file in place'
-  copy:
-    src: 'sabnzbd.ini'
-    dest: "{{ sabnzbd_daemon_config_file }}"
-    owner: "{{ sabnzbd_daemon_user }}"
-    mode: '0755'
-    force: 'no'
-
 - name: 'Set the contents of the /etc/default/sabnzbdplus file appropriately'
   template:
     src: 'sabnzbdplus.j2'
@@ -60,12 +52,13 @@
     state: 'latest'
   notify: 'restart-ansible-role-sabnzbd'
 
+- meta: flush_handlers
+
 - name: 'Ensure that the sabnzbd daemon is running'
   service:
     name: 'sabnzbdplus'
     state: 'started'
-
-- meta: flush_handlers
+    enabled: 'yes'
 
 - name: 'Create the nzbtomedia scripts directory'
   file:

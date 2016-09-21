@@ -57,13 +57,13 @@
     state: 'latest'
   notify: 'restart-ansible-role-sabnzbd'
 
-- meta: flush_handlers
-
 - name: 'Ensure that the sabnzbd daemon is running'
   service:
     name: 'sabnzbdplus'
     state: 'started'
     enabled: 'yes'
+
+- meta: flush_handlers
 
 - name: 'Create the nzbtomedia scripts directory'
   file:

@@ -31,6 +31,11 @@
     - 'downloads'
     - 'incomplete-downloads'
 
+- name: 'Create the sabnzbd config directory only if it is not already present'
+  shell: '/bin/mkdir -p {{ sabnzbd_daemon_config_file | dirname }} && /bin/chown -R {{ sabnzbd_daemon_user }}: {{ sabnzbd_daemon_config_file | dirname }}'
+  args:
+    creates: '{{ sabnzbd_daemon_config_file | dirname }}'
+
 - name: 'Set the contents of the /etc/default/sabnzbdplus file appropriately'
   template:
     src: 'sabnzbdplus.j2'

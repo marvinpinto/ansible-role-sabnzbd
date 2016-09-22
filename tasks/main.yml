@@ -84,4 +84,5 @@
   copy:
     content: "{{ sabnzbd_nzbtomedia_autoprocessmedia_cfg }}"
     dest: "{{ sabnzbd_nzbtomedia_directory }}/autoProcessMedia.cfg"
+    owner: "{{ sabnzbd_daemon_user }}"
     mode: '0644'

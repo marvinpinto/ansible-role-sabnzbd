@@ -86,3 +86,6 @@
     dest: "{{ sabnzbd_nzbtomedia_directory }}/autoProcessMedia.cfg"
     owner: "{{ sabnzbd_daemon_user }}"
     mode: '0644'
+  notify: 'restart-ansible-role-sabnzbd'
+
+- meta: flush_handlers

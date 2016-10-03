@@ -77,8 +77,8 @@
     clone: 'yes'
     dest: "{{ sabnzbd_nzbtomedia_directory }}"
     force: 'yes'
-    repo: 'https://github.com/clinton-hall/nzbToMedia.git'
-    version: '2d770510a284fadc6b44628626f5769789086dbb'  # SHA corresponding to v10.15
+    repo: '{{ sabnzbd_app_nzbtomedia_repo }}'
+    version: '{{ sabnzbd_app_nzbtomedia_version }}'
 
 - name: 'Put the autoProcessMedia.cfg file in place'
   copy:

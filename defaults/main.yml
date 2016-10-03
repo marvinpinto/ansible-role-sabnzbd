@@ -2,6 +2,8 @@
 
 # Application config
 sabnzbd_app_directory: '/opt/sabnzbd'
+sabnzbd_app_nzbtomedia_repo: 'https://github.com/clinton-hall/nzbToMedia.git'
+sabnzbd_app_nzbtomedia_version: '2d770510a284fadc6b44628626f5769789086dbb'  # SHA corresponding to v10.15
 
 # Daemon config
 sabnzbd_daemon_user: 'sabdownloader'

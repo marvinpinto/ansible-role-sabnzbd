@@ -51,9 +51,21 @@
     state: 'present'
     update_cache: 'yes'
 
+- name: 'Add the sabnzbd addons PPA repository'
+  apt_repository:
+    repo: 'ppa:jcfp/sab-addons'
+    state: 'present'
+    update_cache: 'yes'
+
 - name: 'Install the latest stable version of sabnzbd'
   apt:
     name: 'sabnzbdplus'
+    state: 'latest'
+  notify: 'restart-ansible-role-sabnzbd'
+
+- name: 'Install the recommended sabyenc module'
+  apt:
+    name: 'python-sabyenc'
     state: 'latest'
   notify: 'restart-ansible-role-sabnzbd'
 
